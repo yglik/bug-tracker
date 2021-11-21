@@ -1,10 +1,14 @@
-<p>test-api works!</p>
+<p>this component is for testing only. will be deleted</p>
+
+<!-- Reactive forms testing -->
 <div class="row">
+    <!-- Form control -->
     <div class="col-6 p-3 bg-secondary">
         <label for="name">Name: </label>
         <input type="text" id="name" [formControl]="name">
         <p>value is: {{name.value}}</p>
     </div>
+    <!-- Form group -->
     <div class="col-6 bg-secondary">
         <form [formGroup]="ticketInfo" (ngSubmit)="onSubmit()">
             <label for="title">Title:</label>
@@ -18,7 +22,10 @@
         </form>
     </div>
 </div>
+
+<!-- API request testing -->
 <div class="row">
+    <!-- GET -->
     <div class="col-3 card text-center p-1 bg-info bg-opacity-50">
         <div class="card-body">
             <h5 class="card-title">GET data</h5>
@@ -38,6 +45,7 @@
             <button class="btn btn-info" (click)="loadData()">load data</button>
         </div>
     </div>
+    <!-- POST -->
     <div class="col-3 card text-center p-1 bg-primary bg-opacity-50">
         <div class="card-body">
             <h5 class="card-title">POST data</h5>
@@ -61,6 +69,7 @@
 
         </div>
     </div>
+    <!-- PUT -->
     <div class="col-3 card text-center p-1 bg-warning bg-opacity-50">
         <div class="card-body">
             <h5 class="card-title">PUT data</h5>
@@ -88,6 +97,7 @@
             </form>
         </div>
     </div>
+    <!-- DELETE -->
     <div class="col-3 card text-center p-1 bg-danger bg-opacity-50">
         <div class="card-body">
             <h5 class="card-title">DELETE data</h5>
@@ -101,5 +111,4 @@
             </form>
         </div>
     </div>
-
 </div>

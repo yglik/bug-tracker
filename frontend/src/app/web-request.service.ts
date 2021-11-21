@@ -5,10 +5,6 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 
-
-
-
-
 export class WebRequestService {
   ROOT_URL: string = 'http://localhost:3000'
   constructor(private http: HttpClient) { }
@@ -24,7 +20,6 @@ export class WebRequestService {
   putData(dir: string, data: {}) {
     return this.http.put(`${this.ROOT_URL}/${dir}`, data);
   }
-  
 
   deleteData(dir: string) {
     return this.http.delete(`${this.ROOT_URL}/${dir}`)

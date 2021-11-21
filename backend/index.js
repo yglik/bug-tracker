@@ -14,6 +14,7 @@ const { Schema } = mongoose;
 
 // Middleware
 app.use(cors());
+//body-parser from npm is deprecated. TODO - update to Express built-in Method
 app.use(bodyParser.json());
 
 // Static
@@ -30,6 +31,10 @@ const ticketSchema = new Schema({
 const Ticket = mongoose.model('ticket', ticketSchema);
 
 //Routing
+/**
+ * TODO - check what is the correct way to respond after post/put/delete
+ * current state - frontend app send another get request after post/put/delete request
+ */
 app.get('/', (req, res) => {
     console.log("got GET request from /");
     Ticket.find().then((tickets) => { res.send(tickets);});
@@ -37,27 +42,22 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
     console.log("got POST request from /");
-
     const newTicket = new Ticket({
         title: req.body.title,
         description: req.body.description,
         user: req.body.user
     });
     newTicket.save();
-    Ticket.find().then((tickets) => { res.send(tickets);});
 })
 
 app.put('/:ticketID', (req, res) => {
     console.log(`got DELETE request from /${req.params.ticketID}`);
     Ticket.findOneAndUpdate({_id: req.params.ticketID}, { $set: req.body }, () => {});
-    Ticket.find().then((tickets) => { res.send(tickets);});
 })
 
 app.delete('/:ticketID', (req, res) => {
     console.log(`got DELETE request from /${req.params.ticketID}`);
     Ticket.findOneAndRemove({_id: req.params.ticketID}, () => {});
-    Ticket.find().then((tickets) => { res.send(tickets);});
-
 })
 
 
