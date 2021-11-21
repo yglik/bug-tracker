@@ -1,0 +1,105 @@
+<p>test-api works!</p>
+<div class="row">
+    <div class="col-6 p-3 bg-secondary">
+        <label for="name">Name: </label>
+        <input type="text" id="name" [formControl]="name">
+        <p>value is: {{name.value}}</p>
+    </div>
+    <div class="col-6 bg-secondary">
+        <form [formGroup]="ticketInfo" (ngSubmit)="onSubmit()">
+            <label for="title">Title:</label>
+            <input type="text" id="title" formControlName="title"><br>
+
+            <label for="description">Description: </label>
+            <input type="text" id="description" formControlName="description">
+
+            <p>Complete the form to enable button.</p>
+            <button type="submit" [disabled]="!ticketInfo.valid">Submit</button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-3 card text-center p-1 bg-info bg-opacity-50">
+        <div class="card-body">
+            <h5 class="card-title">GET data</h5>
+            <p class="card-text">here is all the data</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <ul class="list-group my-1" *ngFor="let ticket of tickets">
+                <li class="list-group-item my-1 text-start">
+                    <p>title: {{ticket['title']}}</p>
+                    <p>desc: {{ticket['description']}}</p>
+                    <p>user: {{ticket['user']}}</p>
+                    <p>id: {{ticket['_id']}}</p>
+                </li>
+            </ul>
+        </ul>
+        <div class="card-body">
+            <button class="btn btn-info" (click)="loadData()">load data</button>
+        </div>
+    </div>
+    <div class="col-3 card text-center p-1 bg-primary bg-opacity-50">
+        <div class="card-body">
+            <h5 class="card-title">POST data</h5>
+            <p class="card-text">post some data</p>
+            <form>
+                <div class="mb-2">
+                    <label for="post-title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="post-title" [(ngModel)]="ticket.title" name="title">
+                </div>
+                <div class="mb-2">
+                    <label for="post-description" class="form-label">Description</label>
+                    <textarea class="form-control" id="post-description" rows="1" [(ngModel)]="ticket.description"
+                        name="description"></textarea>
+                </div>
+                <div class="mb-2">
+                    <label for="user" class="form-label">User</label>
+                    <input type="email" class="form-control" id="post-user" [(ngModel)]="ticket.user" name="user">
+                </div>
+                <button class="btn btn-primary mt-2" type="submit" (click)="sendData()">send data</button>
+            </form>
+
+        </div>
+    </div>
+    <div class="col-3 card text-center p-1 bg-warning bg-opacity-50">
+        <div class="card-body">
+            <h5 class="card-title">PUT data</h5>
+            <p class="card-text">update data</p>
+            <form>
+                <div class="mb-2">
+                    <label for="put-id" class="form-label">ID</label>
+                    <input type="text" class="form-control" id="put-id" [(ngModel)]="updateID" name="update">
+                </div>
+                <div class="mb-2">
+                    <label for="put-title" class="form-label">Title</label>
+                    <input type="email" class="form-control" id="put-title" [(ngModel)]="ticket.title" name="title">
+                </div>
+                <div class="mb-2">
+                    <label for="put-description" class="form-label">Description</label>
+                    <textarea class="form-control" id="put-description" rows="1" [(ngModel)]="ticket.description"
+                        name="description"></textarea>
+                </div>
+                <div class="mb-2">
+                    <label for="put-user" class="form-label">User</label>
+                    <input type="email" class="form-control" id="put-user" [(ngModel)]="ticket.user" name="user">
+                </div>
+                <button class="btn btn-warning mt-2" type="submit" (click)="updateData()">update data</button>
+
+            </form>
+        </div>
+    </div>
+    <div class="col-3 card text-center p-1 bg-danger bg-opacity-50">
+        <div class="card-body">
+            <h5 class="card-title">DELETE data</h5>
+            <p class="card-text">update data</p>
+            <form>
+                <div class="mb-2">
+                    <label for="delete-id" class="form-label">ID</label>
+                    <input type="text" class="form-control" id="delete-id" [(ngModel)]="deleteID" name="delete">
+                </div>
+                <button class="btn btn-danger mt-2" type="submit" (click)="deleteData()">delete data</button>
+            </form>
+        </div>
+    </div>
+
+</div>

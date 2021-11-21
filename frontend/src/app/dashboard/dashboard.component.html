@@ -2,26 +2,26 @@
 <div class="bg-light p-3">
     <div class="d-flex justify-content-between align-items-center mb-4 ps-3 pe-4">
         <h1 class="display-3">all tickets</h1>
-        <button class="btn btn-primary"> add new</button>
+        <form [formGroup]="newTicket" (ngSubmit)=addTicket()>
+            <label for="title" class="me-1">Title: </label>
+            <input type="text" id="title" formControlName="title" class="me-1">
+
+            <label for="description" class="me-1">Description: </label>
+            <input type="text" id="description" formControlName="description" class="me-1">
+
+            <button type="submit" class="btn btn-primary">add new</button>
+        </form>
     </div>
-    <ul class="list-group">
-        <li routerLink="/ticket" class="btn btn-info list-group-item my-2 d-flex align-items-center justify-content-between border-0 rounded shadow">
-            <span>item 1</span>
-            <span>description</span>
-            <span>user</span>
-            <button class="btn btn-danger">delete</button>
-        </li>
-        <li class="btn btn-info list-group-item my-2 d-flex align-items-center justify-content-between border-0 rounded shadow">
-            <span>item 2</span>
-            <span>description</span>
-            <span>user</span>
-            <button class="btn btn-danger">delete</button>
-        </li>
-        <li class="btn btn-info list-group-item my-2 d-flex align-items-center justify-content-between border-0 rounded shadow">
-            <span>item 3</span>
-            <span>description</span>
-            <span>user</span>
-            <button class="btn btn-danger">delete</button>
-        </li>
+
+    <ul class="list-group my-1" *ngFor="let ticket of tickets">
+        <div class="d-flex justify-content-between">
+            <li routerLink="/ticket"
+                class="btn btn-info list-group-item my-2 d-flex flex-grow-1 align-items-center justify-content-between border-0 rounded shadow">
+                <span>{{ticket['title']}}</span>
+                <span>{{ticket['description']}}</span>
+                <span>{{ticket['user']}}</span>
+            </li>
+            <button class="btn btn-danger ms-2 btn-sm" (click)="deleteTicket(ticket['_id'])">delete</button>
+        </div>
     </ul>
 </div>
