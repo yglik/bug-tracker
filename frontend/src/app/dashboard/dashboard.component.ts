@@ -27,31 +27,32 @@ export class DashboardComponent implements OnInit {
   })
 
   //using specific function to update view (TODO - check if this is the best practice to update view)
-  updateView(){
-    this.webReq.getData('').subscribe((response) => {
-      this.tickets = response;
-    })
+  updateTickets(newTickets: any): void{
+      this.tickets = newTickets;
   }
+  
 
   addTicket() {
     this.ticket.title = this.newTicket.value['title'];
     this.ticket.description = this.newTicket.value['description'];
-    this.webReq.postData('', this.ticket).subscribe(() => {
-      this.updateView();
+    this.webReq.postData('', this.ticket).subscribe((response) => {
+      this.updateTickets(response);
     });
+    
   }
 
-
   deleteTicket(ticketID: string) {
-    this.webReq.deleteData(ticketID).subscribe(() => {
-      this.updateView();
+    this.webReq.deleteData(ticketID).subscribe((response) => {
+      this.updateTickets(response);
     });
   }
 
   constructor(private webReq: WebRequestService) { }
 
   ngOnInit(): void {
-    this.updateView()
+    this.webReq.getData('').subscribe((response) => {
+      this.updateTickets(response);
+    })
   }
 
 }
