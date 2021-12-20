@@ -3,6 +3,7 @@ const cors = require("cors");
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+
 // Create express app
 const app = express();
 
@@ -10,11 +11,11 @@ const app = express();
 mongoose.connect('mongodb://localhost:27017/bug-tracker', () => {
     console.log("connected to the DataBase")
 });
-const { Schema } = mongoose;
+
 
 // Middleware
 app.use(cors());
-//body-parser from npm is deprecated. TODO - update to Express built-in Method
+//body-parser from npm is deprecated. TODO - update to Express built-in Method…
 app.use(bodyParser.json());
 
 //try to make my own logger for debuging
@@ -31,7 +32,7 @@ const myLogger = (msg) => {
 const PORT = 3000;
 
 // Schema & Model
-const ticketSchema = new Schema({
+const ticketSchema = new mongoose.Schema({
     title: String, // String is shorthand for {type: String}
     description: String,
     user: String,
@@ -54,7 +55,6 @@ const sendAllTickets = (res) => {
         myLogger(`this is the response ${tickets}`)
     });
 }
-
 
 app.get('/', (req, res) => {
     console.log("got GET request from /");
@@ -91,7 +91,6 @@ app.delete('/:ticketID', (req, res) => {
             sendAllTickets(res);
     });
 })
-
 
 // LISTEN
 app.listen(PORT, () => {
